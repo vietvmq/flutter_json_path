@@ -28,7 +28,5 @@ void main() {
 
   var json3 = {...target};
   parser.delete(json3, 'foo/bar');
-  print('del: $json3');  // del: {foo: {}}
+  print('del: $json3'); // del: {foo: {}}
 }
-
-
