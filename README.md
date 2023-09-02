@@ -45,7 +45,7 @@ void main() {
   Map<String, dynamic> target = {
     'foo': {
       'bar': {
-      'baz': 42,
+        'baz': 42,
       },
     },
   };
