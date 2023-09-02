@@ -1,6 +1,6 @@
 name: flutter_json_path
 description:  gen, get, set, delete of Json Maps using path relative keys.
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/vietvmq/flutter_json_path
 repository: https://github.com/vietvmq/flutter_json_path
 issue_tracker: https://github.com/vietvmq/flutter_json_path/issues
