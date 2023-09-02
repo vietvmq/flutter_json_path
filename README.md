@@ -14,7 +14,7 @@ Add `FlutterJsonPath` to your pubspec.yaml file:
 
 ```yaml
 dependencies:
-  flutter_json_path: { { latest_version } }
+  flutter_json_path: latest_version
 ```
 
 Import `FlutterJsonPath` in files that it will be used:
