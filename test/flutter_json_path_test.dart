@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('FlutterJsonPath', () {
     test('gen creates a nested map', () {
-      final flutterJson = FlutterJsonPath();
-      final result = flutterJson.gen('foo/bar/baz');
+      final parser = FlutterJsonPath();
+      final result = parser.gen('foo/bar/baz');
       expect(result, {
         'foo': {
           'bar': {
@@ -16,7 +16,7 @@ void main() {
     });
 
     test('get retrieves value from nested map', () {
-      final flutterJson = FlutterJsonPath();
+      final parser = FlutterJsonPath();
       final Map<String, dynamic> map = {
         'foo': {
           'bar': {
@@ -24,18 +24,18 @@ void main() {
           },
         },
       };
-      final result = flutterJson.get(map, 'foo/bar/baz');
+      final result = parser.get(map, 'foo/bar/baz');
       expect(result, 42);
     });
 
     test('set sets value in nested map', () {
-      final flutterJson = FlutterJsonPath();
+      final parser = FlutterJsonPath();
       final Map<String, dynamic> map = {
         'foo': {
           'bar': null,
         },
       };
-      flutterJson.set(map, 'foo/bar/baz', 42);
+      parser.set(map, 'foo/bar/baz', 42);
       expect(map, {
         'foo': {
           'bar': {
@@ -46,7 +46,7 @@ void main() {
     });
 
     test('delete removes value from nested map', () {
-      final flutterJson = FlutterJsonPath();
+      final parser = FlutterJsonPath();
       final Map<String, dynamic> map = {
         'foo': {
           'bar': {
@@ -54,39 +54,39 @@ void main() {
           },
         },
       };
-      flutterJson.delete(map, 'foo/bar');
+      parser.delete(map, 'foo/bar');
       expect(map, {
         'foo': {},
       });
     });
 
     test('get throws Exception for invalid key', () {
-      final flutterJson = FlutterJsonPath();
+      final parser = FlutterJsonPath();
       final Map<String, dynamic> map = {
         'foo': {},
       };
       expect(
-        () => flutterJson.get(map, 'foo/bar', forceContainKey: true),
+        () => parser.get(map, 'foo/bar', forceContainKey: true),
         throwsException,
       );
     });
 
     test('set throws Exception for invalid key', () {
-      final flutterJson = FlutterJsonPath();
+      final parser = FlutterJsonPath();
       final map = <String, dynamic>{};
       expect(
-        () => flutterJson.set(map, 'foo/bar/baz', 42, forceContainKey: true),
+        () => parser.set(map, 'foo/bar/baz', 42, forceContainKey: true),
         throwsException,
       );
     });
 
     test('delete throws Exception for invalid key', () {
-      final flutterJson = FlutterJsonPath();
+      final parser = FlutterJsonPath();
       final Map<String, dynamic> map = {
         'foo': {},
       };
       expect(
-        () => flutterJson.delete(map, 'foo/bar', forceContainKey: true),
+        () => parser.delete(map, 'foo/bar', forceContainKey: true),
         throwsException,
       );
     });

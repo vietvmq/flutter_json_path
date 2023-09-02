@@ -1,39 +1,73 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# [FlutterJsonPath] in Dart
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+# A way to get and set json Map values using key paths!
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+> NOTE: A valid `Map<String, dynamic>` can be obtained using json encode/decode functions. This package will not work properly if your Map variable was initialized using Map Literals
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Now you can read and write your json files without converting them to a model mapped version. Just use the key path to go directly where you want and **get**, **set**, **delete** or **gen** keys and values!
+
+# Installing
+
+Add `FlutterJsonPath` to your pubspec.yaml file:
+
+```yaml
+dependencies:
+  flutter_json_path: { { latest_version } }
+```
+
+Import `FlutterJsonPath` in files that it will be used:
+
+```dart
+import 'package:flutter_json_path/flutter_json_path.dart';
+```
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Just create an instance of `FlutterJsonPath` and start working:
+
+```dart
+  final parser = FlutterJsonPath();
+  final result = parser.gen('foo/bar/baz');
+  print('gen: $result'); // gen: {foo: {bar: CLUB}}
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
 ```dart
-const like = 'sample';
+import 'dart:convert';
+import 'package:flutter_json_path/flutter_json_path.dart';
+
+void main() {
+  // Just to use as an example.
+  // This is Map Literals initialization.
+  Map<String, dynamic> target = {
+    'foo': {
+      'bar': {
+      'baz': 42,
+      },
+    },
+  };
+  // This package does not work with Map Literals.
+  // Must convert your Map to Json string and to Map again.
+  // (if this is the case)
+  target = jsonDecode(jsonEncode(target));
+
+  final parser = FlutterJsonPath();
+
+  var json1 = {...target};
+  var value = parser.get(json1, 'foo/bar/baz');
+  print('get: $value'); // get: 42
+
+  var json2 = {...target};
+  parser.set(json2, 'foo/bar', null);
+  print('set: $json2'); // set: {foo: {bar: CLUB}}
+
+  var json3 = {...target};
+  parser.delete(json3, 'foo/bar');
+  print('del: $json3');  // del: {foo: {}}
+}
 ```
 
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+**Show some ❤️ and star the repo to support the project**

@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter_json_path/flutter_json_path.dart';
 
 void main() {
-  final Map<String, dynamic> map = {
+  Map<String, dynamic> target = {
     'foo': {
       'bar': {
         'baz': 42,
@@ -9,17 +11,22 @@ void main() {
     },
   };
 
+  target = jsonDecode(jsonEncode(target));
+
   final parser = FlutterJsonPath();
 
-  var json1 = {...map};
+  var json = parser.gen('foo/bar/baz');
+  print('gen: $json');
+
+  var json1 = {...target};
   var value = parser.get(json1, 'foo/bar/baz');
   print('get: $value'); // get: 42
 
-  var json2 = {...map};
-  parser.set(json2, 'foo/bar', 'CLUB');
+  var json2 = {...target};
+  parser.set(json2, 'foo/bar', null);
   print('set: $json2'); // set: {foo: {bar: CLUB}}
 
-  var json3 = {...map};
+  var json3 = {...target};
   parser.delete(json3, 'foo/bar');
   print('del: $json3');  // del: {foo: {}}
 }
