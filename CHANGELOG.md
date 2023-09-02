@@ -1,3 +1,2 @@
 ## 0.0.1
-
-* TODO: Describe initial release.
+- Initial flutter_json_path package
