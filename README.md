@@ -28,9 +28,9 @@ import 'package:flutter_json_path/flutter_json_path.dart';
 Just create an instance of `FlutterJsonPath` and start working:
 
 ```dart
-  final parser = FlutterJsonPath();
-  final result = parser.gen('foo/bar/baz');
-  print('gen: $result'); // gen: {foo: {bar: CLUB}}
+final parser = FlutterJsonPath();
+final result = parser.gen('foo/bar/baz');
+print('gen: $result'); // gen: {foo: {bar: CLUB}}
 ```
 
 ## Usage
